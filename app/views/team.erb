@@ -1,0 +1,21 @@
+<div class="container wb-page">
+  <h1>Our team</h1>
+  <p class="lead">Experienced, gentle and endlessly curious - meet the people who will look after your pet.</p>
+  <% @vets.each do |v| %>
+  <div class="wb-card wb-vet">
+    <div class="media">
+      <div class="media-left"><img src="/assets/img/<%= h v['photo'] %>" alt="" class="wb-avatar"></div>
+      <div class="media-body">
+        <h3 class="media-heading"><%= h v['name'] %></h3>
+        <p class="text-muted"><%= h v['specialty'] %></p>
+        <p><%= h v['bio'] %></p>
+        <% if v['email'] %><p><span class="glyphicon glyphicon-envelope"></span> <a href="mailto:<%= h v['email'] %>"><%= h v['email'] %></a></p><% end %>
+      </div>
+    </div>
+  </div>
+  <% end %>
+  <div class="wb-card">
+    <h4>Front desk &amp; nursing team</h4>
+    <p>Our reception and nursing team are your first point of contact for bookings, prescriptions and billing questions. Reach them at <a href="mailto:frontdesk@willowbrookvets.com">frontdesk@willowbrookvets.com</a>.</p>
+  </div>
+</div>

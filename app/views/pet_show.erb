@@ -1,0 +1,65 @@
+<div class="container wb-page">
+  <ol class="breadcrumb"><li><a href="/pets">My pets</a></li><li class="active"><%= h @pet['name'] %></li></ol>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="wb-card text-center">
+        <img src="<%= h pet_photo(@pet) %>" alt="" class="wb-pet-photo">
+        <h2><%= h @pet['name'] %></h2>
+        <p class="text-muted"><%= h @pet['species'] %><%= @pet['breed'].to_s.empty? ? '' : " &middot; #{h @pet['breed']}" %></p>
+        <dl class="dl-horizontal wb-dl">
+          <dt>Born</dt><dd><%= @pet['dob'] ? fmt_date(@pet['dob']) : '&mdash;' %></dd>
+          <dt>Weight</dt><dd><%= @pet['weight_kg'] ? "#{@pet['weight_kg'].to_f} kg" : '&mdash;' %></dd>
+        </dl>
+        <% unless @pet['notes'].to_s.empty? %><p class="wb-notes"><%= h @pet['notes'] %></p><% end %>
+      </div>
+      <div class="wb-card">
+        <h5>Update photo</h5>
+        <p class="small text-muted">Paste a link to a photo of <%= h @pet['name'] %> (JPEG, PNG, GIF or WebP) and we'll add it to their profile.</p>
+        <form method="post" action="/pets/<%= @pet['id'] %>/photo">
+          <div class="input-group input-group-sm">
+            <input type="url" class="form-control" name="photo_url" placeholder="https://example.com/photo.jpg" required>
+            <span class="input-group-btn"><button class="btn btn-default" type="submit">Import</button></span>
+          </div>
+        </form>
+      </div>
+      <form method="post" action="/pets/<%= @pet['id'] %>/delete" onsubmit="return confirm('Remove <%= h @pet['name'].gsub("'", '') %> and all their records from your account?');">
+        <button class="btn btn-link text-danger btn-sm" type="submit"><span class="glyphicon glyphicon-trash"></span> Remove pet from account</button>
+      </form>
+    </div>
+    <div class="col-md-8">
+      <div class="wb-card">
+        <h4>Medical records</h4>
+        <% if @records.empty? %>
+          <p class="text-muted">No records yet.</p>
+        <% else %>
+          <table class="table wb-table">
+            <thead><tr><th>Date</th><th>Record</th><th></th></tr></thead>
+            <tbody>
+            <% @records.each do |r| %>
+              <tr>
+                <td class="text-nowrap"><%= fmt_date r['recorded_on'] %></td>
+                <td><strong><%= h r['title'] %></strong><br><span class="small text-muted"><%= h r['summary'] %></span></td>
+                <td class="text-right"><% if r['file'] %><a class="btn btn-default btn-xs" href="/records/download?file=<%= Rack::Utils.escape(r['file']) %>"><span class="glyphicon glyphicon-download-alt"></span> PDF</a><% end %></td>
+              </tr>
+            <% end %>
+            </tbody>
+          </table>
+        <% end %>
+      </div>
+      <div class="wb-card">
+        <h4>Visits</h4>
+        <% if @appts.empty? %>
+          <p class="text-muted">No visits yet. <a href="/appointments/book">Book one</a>.</p>
+        <% else %>
+          <table class="table wb-table">
+            <% @appts.each do |a| %>
+              <tr><td><%= fmt_date a['appt_date'] %> <%= fmt_time a['appt_time'] %></td><td><%= h a['vet_name'] %></td>
+                  <td><span class="label label-default"><%= h a['status'] %></span></td>
+                  <td class="text-right"><% if a['owner_id'] == uid %><a href="/appointments/<%= a['id'] %>">Details</a><% end %></td></tr>
+            <% end %>
+          </table>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

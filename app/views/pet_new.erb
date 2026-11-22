@@ -1,0 +1,34 @@
+<div class="container wb-page">
+  <div class="row">
+    <div class="col-md-7">
+      <div class="wb-card">
+        <h2>Add a pet</h2>
+        <form method="post" action="/pets">
+          <div class="row">
+            <div class="col-sm-6 form-group"><label>Name *</label><input class="form-control" name="name" required></div>
+            <div class="col-sm-6 form-group"><label>Species</label>
+              <select class="form-control" name="species">
+                <option>Dog</option><option>Cat</option><option>Rabbit</option><option>Bird</option><option>Guinea pig</option><option>Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6 form-group"><label>Breed</label><input class="form-control" name="breed"></div>
+            <div class="col-sm-3 form-group"><label>Date of birth</label><input type="date" class="form-control" name="dob"></div>
+            <div class="col-sm-3 form-group"><label>Weight (kg)</label><input type="number" step="0.1" class="form-control" name="weight_kg"></div>
+          </div>
+          <div class="form-group"><label>Anything we should know?</label>
+            <textarea class="form-control" name="notes" rows="3" placeholder="Allergies, medication, behaviour at the vet..."></textarea></div>
+          <button class="btn btn-wb" type="submit">Save pet</button>
+          <a href="/pets" class="btn btn-link">Cancel</a>
+        </form>
+      </div>
+    </div>
+    <div class="col-md-5">
+      <div class="wb-aside">
+        <h4>Why we ask</h4>
+        <p>Accurate weight and date of birth help us dose medication safely. Notes about behaviour mean we can make visits as calm as possible.</p>
+      </div>
+    </div>
+  </div>
+</div>

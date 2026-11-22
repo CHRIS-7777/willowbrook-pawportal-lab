@@ -1,0 +1,69 @@
+<div class="container wb-page">
+  <div class="wb-page-head">
+    <h1>Hello, <%= h current_user['full_name'].split.first %></h1>
+    <a href="/appointments/book" class="btn btn-wb"><span class="glyphicon glyphicon-plus"></span> Book appointment</a>
+  </div>
+
+  <div class="row">
+    <div class="col-md-8">
+      <div class="wb-card">
+        <h4>Your pets</h4>
+        <% if @pets.empty? %>
+          <p>You haven't added any pets yet. <a href="/pets/new">Add your first pet</a>.</p>
+        <% else %>
+          <div class="row">
+            <% @pets.each do |p| %>
+              <div class="col-xs-6 col-sm-4">
+                <a class="wb-pet-tile" href="/pets/<%= p['id'] %>">
+                  <img src="<%= h pet_photo(p) %>" alt="">
+                  <strong><%= h p['name'] %></strong>
+                  <span class="text-muted"><%= h p['species'] %><%= p['breed'].to_s.empty? ? '' : " &middot; #{h p['breed']}" %></span>
+                </a>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="wb-card">
+        <h4>Upcoming appointments</h4>
+        <% if @appts.empty? %>
+          <p class="text-muted">Nothing booked. <a href="/appointments/book">Book a visit</a>.</p>
+        <% else %>
+          <table class="table wb-table">
+            <% @appts.each do |a| %>
+              <tr>
+                <td><strong><%= fmt_date a['appt_date'] %></strong> <%= fmt_time a['appt_time'] %></td>
+                <td><%= h a['pet_name'] %> with <%= h a['vet_name'] %></td>
+                <td class="text-right"><a href="/appointments/<%= a['id'] %>">Details</a></td>
+              </tr>
+            <% end %>
+          </table>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="wb-card">
+        <h4>Recent invoices</h4>
+        <% if @invoices.empty? %>
+          <p class="text-muted">No invoices yet.</p>
+        <% else %>
+          <ul class="list-unstyled wb-inv-list">
+            <% @invoices.each do |i| %>
+              <li><a href="/invoices/<%= i['id'] %>">INV-<%= i['id'] %></a>
+                <span class="pull-right"><%= money i['amount'] %> <span class="label label-<%= i['status'] == 'paid' ? 'success' : 'warning' %>"><%= h i['status'] %></span></span></li>
+            <% end %>
+          </ul>
+        <% end %>
+      </div>
+
+      <div class="wb-card wb-mobile">
+        <h4><span class="glyphicon glyphicon-phone"></span> Continue on your phone</h4>
+        <p class="small">Open this link on your phone to pick up where you left off in the Willowbrook app.</p>
+        <input type="text" class="form-control input-sm" readonly onclick="this.select()"
+               value="<%= h request.base_url %>/m/handoff?sid=<%= h @sid %>&amp;next=/dashboard">
+      </div>
+    </div>
+  </div>
+</div>

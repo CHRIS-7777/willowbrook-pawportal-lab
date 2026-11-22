@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Invoice INV-<%= @inv['id'] %> | Willowbrook Veterinary Clinic</title>
+  <link rel="stylesheet" href="/assets/vendor/bootstrap-3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/css/clinic.css">
+</head>
+<body class="wb-invoice-body">
+<div class="container wb-invoice">
+  <div class="row wb-inv-head">
+    <div class="col-xs-6">
+      <img src="/assets/img/logo.svg" alt="" width="42" height="42">
+      <h3>Willowbrook Veterinary Clinic</h3>
+      <p class="small">2280 SE Willow Creek Rd, Portland, OR 97202<br>(503) 555-0100 &middot; billing@willowbrookvets.com<br>EIN 93-4417209</p>
+    </div>
+    <div class="col-xs-6 text-right">
+      <h2>INVOICE</h2>
+      <p><strong>INV-<%= @inv['id'] %></strong><br>Issued <%= fmt_date @inv['issued_on'] %><br>
+        <span class="label label-<%= @inv['status'] == 'paid' ? 'success' : 'warning' %>"><%= h @inv['status'].upcase %></span></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-6">
+      <h5>Billed to</h5>
+      <p><strong><%= h @inv['full_name'] %></strong><br>
+        <%= h @inv['address'] %><% unless @inv['address'].to_s.empty? %><br><% end %>
+        <%= h @inv['email'] %><br><%= h @inv['phone'] %></p>
+    </div>
+    <div class="col-xs-6 text-right">
+      <h5>Patient</h5>
+      <p><%= h @inv['pet_name'] %> <span class="text-muted">(<%= h @inv['species'] %>)</span></p>
+    </div>
+  </div>
+  <table class="table wb-table">
+    <thead><tr><th>Description</th><th class="text-right">Amount</th></tr></thead>
+    <tbody>
+      <% invoice_lines(@inv).each do |desc, amt| %>
+        <tr><td><%= h desc %></td><td class="text-right"><%= money amt %></td></tr>
+      <% end %>
+    </tbody>
+    <tfoot><tr><th class="text-right">Total</th><th class="text-right"><%= money @inv['amount'] %></th></tr></tfoot>
+  </table>
+  <% if @inv['status'] == 'paid' && @inv['card_last4'] %>
+    <p>Paid by <%= h @inv['card_brand'] %> ending <%= h @inv['card_last4'] %>. Thank you!</p>
+  <% else %>
+    <p>Payment is due within 14 days. Pay at the front desk or call (503) 555-0100.</p>
+  <% end %>
+  <p class="hidden-print"><button class="btn btn-default" onclick="window.print()"><span class="glyphicon glyphicon-print"></span> Print</button>
+    <a href="/invoices" class="btn btn-link">Back to invoices</a></p>
+</div>
+</body>
+</html>

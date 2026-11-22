@@ -1,0 +1,54 @@
+<div class="container wb-page">
+  <h1>Find a vet</h1>
+  <form class="wb-search" method="get" action="/find-a-vet">
+    <div class="input-group input-group-lg">
+      <input type="text" class="form-control" name="q" value="<%= h @q %>" placeholder="Search by name, specialty or condition (e.g. dermatology, surgery, rabbits)">
+      <span class="input-group-btn"><button class="btn btn-wb" type="submit">Search</button></span>
+    </div>
+    <p class="help-block" id="recent-searches"></p>
+  </form>
+
+  <% unless @q.strip.empty? %>
+    <h4><%= @vets.size %> result<%= @vets.size == 1 ? '' : 's' %> for &ldquo;<%= h @q %>&rdquo;</h4>
+  <% end %>
+
+  <% if @vets.empty? %>
+    <div class="wb-card"><p>No veterinarians matched your search. Try a broader term, or <a href="/contact">contact the front desk</a> and we'll point you to the right person.</p></div>
+  <% end %>
+
+  <div class="row">
+  <% @vets.each do |v| %>
+    <div class="col-sm-4">
+      <div class="wb-card text-center">
+        <img src="/assets/img/<%= h v['photo'] %>" alt="" class="wb-avatar">
+        <h4><%= h v['name'] %></h4>
+        <p class="text-muted"><%= h v['specialty'] %></p>
+        <a class="btn btn-default btn-sm" href="/appointments/book?vet=<%= v['id'] %>">Book with <%= h v['name'].split.last %></a>
+      </div>
+    </div>
+  <% end %>
+  </div>
+</div>
+<script>
+  (function () {
+    var lastSearch = "<%= @q.gsub('<', '<').gsub('>', '>') %>";
+    var recent = [];
+    try { recent = JSON.parse(localStorage.getItem('wb_recent_searches') || '[]'); } catch (e) { recent = []; }
+    if (lastSearch && recent.indexOf(lastSearch) === -1) {
+      recent.unshift(lastSearch);
+      recent = recent.slice(0, 5);
+      try { localStorage.setItem('wb_recent_searches', JSON.stringify(recent)); } catch (e) {}
+    }
+    var box = document.getElementById('recent-searches');
+    if (recent.length) {
+      box.appendChild(document.createTextNode('Recent searches: '));
+      recent.forEach(function (term, i) {
+        var a = document.createElement('a');
+        a.href = '/find-a-vet?q=' + encodeURIComponent(term);
+        a.textContent = term;
+        box.appendChild(a);
+        if (i < recent.length - 1) box.appendChild(document.createTextNode(' · '));
+      });
+    }
+  })();
+</script>

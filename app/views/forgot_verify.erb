@@ -1,0 +1,27 @@
+<div class="container wb-page">
+  <div class="row">
+    <div class="col-md-5 col-md-offset-3 col-sm-8 col-sm-offset-2">
+      <div class="wb-card wb-auth">
+        <h2>Enter your code</h2>
+        <p class="text-muted">Check your inbox for the 4-digit code we sent you, then choose a new password.</p>
+        <% if @error %><div class="alert alert-danger"><%= h @error %></div><% end %>
+        <form method="post" action="/forgot/verify">
+          <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" class="form-control" id="email" name="email" value="<%= h @email %>" required>
+          </div>
+          <div class="form-group">
+            <label for="code">Verification code</label>
+            <input class="form-control wb-code" id="code" name="code" inputmode="numeric" maxlength="4" pattern="[0-9]{4}" placeholder="0000" required>
+          </div>
+          <div class="form-group">
+            <label for="new_password">New password</label>
+            <input type="password" class="form-control" id="new_password" name="new_password" required minlength="6">
+          </div>
+          <button type="submit" class="btn btn-wb btn-block">Reset password</button>
+        </form>
+        <p class="wb-auth-links"><a href="/forgot">Didn't get a code? Send another</a></p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+<div class="container wb-page">
+  <div class="row">
+    <div class="col-md-5 col-md-offset-1 col-sm-6">
+      <div class="wb-card wb-auth">
+        <h2>Sign in to PawPortal</h2>
+        <% if @error %><div class="alert alert-danger"><%= h @error %></div><% end %>
+        <form method="post" action="/login">
+          <input type="hidden" name="next" value="<%= h @next %>">
+          <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" class="form-control" id="email" name="email" value="<%= h @email %>" required autofocus>
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" name="password" required>
+          </div>
+          <button type="submit" class="btn btn-wb btn-block">Sign in</button>
+        </form>
+        <p class="wb-auth-links"><a href="/forgot">Forgotten your password?</a> &middot; <a href="/register">Create an account</a></p>
+      </div>
+    </div>
+    <div class="col-md-5 col-sm-6">
+      <div class="wb-aside">
+        <h4>With PawPortal you can</h4>
+        <ul>
+          <li>Book and manage appointments</li>
+          <li>Download lab results and X-ray reports</li>
+          <li>View and print invoices</li>
+          <li>Keep your pets' details up to date</li>
+        </ul>
+        <p class="text-muted small">Willowbrook team member? Use the <a href="/staff/login">staff sign-in</a>.</p>
+      </div>
+    </div>
+  </div>
+</div>

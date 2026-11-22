@@ -1,0 +1,27 @@
+<div class="container wb-page">
+  <ol class="breadcrumb"><li><a href="/appointments">Appointments</a></li><li class="active">#<%= @appt['id'] %></li></ol>
+  <div class="row">
+    <div class="col-md-8">
+      <div class="wb-card">
+        <h2><%= h @appt['pet_name'] %> with <%= h @appt['vet_name'] %></h2>
+        <p class="lead"><%= fmt_date @appt['appt_date'] %> at <%= fmt_time @appt['appt_time'] %>
+          <span class="label label-<%= @appt['status'] == 'cancelled' ? 'default' : 'success' %>"><%= h @appt['status'] %></span></p>
+        <h4>Reason for visit</h4>
+        <div class="wb-reason"><%= @appt['reason'] %></div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="wb-card">
+        <h5>Where</h5>
+        <p>Willowbrook Veterinary Clinic<br>2280 SE Willow Creek Rd, Portland</p>
+        <h5>Who</h5>
+        <p><%= h @appt['vet_name'] %><br><span class="text-muted small"><%= h @appt['specialty'] %></span></p>
+        <% if @appt['status'] == 'confirmed' %>
+        <form method="post" action="/appointments/<%= @appt['id'] %>/cancel" onsubmit="return confirm('Cancel this appointment?');">
+          <button class="btn btn-default btn-block" type="submit">Cancel appointment</button>
+        </form>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

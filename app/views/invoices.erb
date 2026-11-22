@@ -1,0 +1,24 @@
+<div class="container wb-page">
+  <h1>Invoices</h1>
+  <div class="wb-card">
+    <% if @invoices.empty? %>
+      <p>No invoices on your account yet.</p>
+    <% else %>
+      <table class="table wb-table">
+        <thead><tr><th>Invoice</th><th>Issued</th><th>Pet</th><th class="text-right">Amount</th><th>Status</th><th></th></tr></thead>
+        <tbody>
+        <% @invoices.each do |i| %>
+          <tr>
+            <td>INV-<%= i['id'] %></td>
+            <td><%= fmt_date i['issued_on'] %></td>
+            <td><%= h i['pet_name'] %></td>
+            <td class="text-right"><%= money i['amount'] %></td>
+            <td><span class="label label-<%= i['status'] == 'paid' ? 'success' : 'warning' %>"><%= h i['status'] %></span></td>
+            <td class="text-right"><a href="/invoices/<%= i['id'] %>" target="_blank">View / print</a></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
+</div>

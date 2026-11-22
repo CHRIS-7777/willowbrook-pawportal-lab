@@ -1,0 +1,72 @@
+<section class="wb-hero">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-7">
+        <span class="wb-eyebrow">Family-owned since 1998</span>
+        <h1>Compassionate care for every paw, claw and feather.</h1>
+        <p class="lead">From puppy vaccinations to complex surgery, the Willowbrook team looks after Portland's pets like they were our own. Book online, check lab results and pay invoices in PawPortal.</p>
+        <p>
+          <a href="/appointments/book" class="btn btn-wb btn-lg">Book an appointment</a>
+          <a href="/register" class="btn btn-link btn-lg">New client? Register &rarr;</a>
+        </p>
+      </div>
+      <div class="col-md-5 hidden-sm hidden-xs">
+        <img src="/assets/img/hero.svg" alt="" class="img-responsive wb-hero-img">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="container wb-section">
+  <div class="row text-center wb-features">
+    <div class="col-sm-4">
+      <div class="wb-icon"><span class="glyphicon glyphicon-calendar"></span></div>
+      <h4>Book in seconds</h4>
+      <p>See live availability for every vet and pick the time that suits you.</p>
+    </div>
+    <div class="col-sm-4">
+      <div class="wb-icon"><span class="glyphicon glyphicon-file"></span></div>
+      <h4>Records on demand</h4>
+      <p>Lab results, X-ray reports and vaccination certificates the moment they are signed off.</p>
+    </div>
+    <div class="col-sm-4">
+      <div class="wb-icon"><span class="glyphicon glyphicon-credit-card"></span></div>
+      <h4>Simple billing</h4>
+      <p>View and print itemised invoices for every visit, any time.</p>
+    </div>
+  </div>
+</section>
+
+<section class="wb-band">
+  <div class="container">
+    <h2 class="text-center">Meet our veterinarians</h2>
+    <div class="row">
+      <% @vets.each do |v| %>
+      <div class="col-sm-4">
+        <div class="wb-card text-center">
+          <img src="/assets/img/<%= h v['photo'] %>" alt="" class="wb-avatar">
+          <h4><%= h v['name'] %></h4>
+          <p class="text-muted"><%= h v['specialty'] %></p>
+        </div>
+      </div>
+      <% end %>
+    </div>
+    <p class="text-center"><a href="/team" class="btn btn-default">Read their stories</a></p>
+  </div>
+</section>
+
+<section class="container wb-section">
+  <div class="row">
+    <div class="col-md-6">
+      <h3>New to Willowbrook?</h3>
+      <p>Save time at your first visit: download and complete our <a href="/intake/forms/new-patient-registration.pdf">new patient registration form</a> and bring it along with any previous vaccination records.</p>
+      <p>Prefer to do it online? <a href="/register">Create a PawPortal account</a> and add your pet's details before you arrive.</p>
+    </div>
+    <div class="col-md-6">
+      <blockquote class="wb-quote">
+        <p>&ldquo;Dr. Mehta and the surgical team were incredible when our Beagle needed a TPLO. Clear updates every step of the way.&rdquo;</p>
+        <footer>David C., Pepper's dad</footer>
+      </blockquote>
+    </div>
+  </div>
+</section>

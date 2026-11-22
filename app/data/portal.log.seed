@@ -1,0 +1,15 @@
+2026-09-28T08:31:07Z boot pawportal 2.3.0 env=production
+2026-09-28T08:42:19Z auth.staff_login result=success email=frontdesk@willowbrookvets.com password=Fr0ntDesk!Wb2026 ip=10.20.0.15 sid=9a1f0c55e2d84b7f8c0e11a2b3c4d5e6
+2026-09-28T09:02:51Z auth.login result=failure email=jessica.moore@example.net password=Tigger ip=73.25.118.4
+2026-09-28T09:03:10Z auth.login result=success email=jessica.moore@example.net password=tigger ip=73.25.118.4 sid=b77c2a9de0f14c3aa1b2c3d4e5f60718
+2026-09-29T07:55:44Z auth.staff_login result=failure email=rohan.mehta@willowbrookvets.com password=Mehta#Vet!8824 ip=10.20.0.31
+2026-09-29T07:56:02Z auth.staff_login result=success email=rohan.mehta@willowbrookvets.com password=Mehta#Vet!8842 ip=10.20.0.31 sid=0c4e8d2a6b1f49e3a5c7d9e1f3a5b7c9
+2026-09-30T11:20:37Z auth.reset_requested email=d.chen@example.org code=7314 ip=24.20.55.190
+2026-09-30T11:22:05Z auth.reset_completed email=d.chen@example.org new_password=basketball ip=24.20.55.190
+2026-10-01T18:04:12Z staff.chart_export user=3 pet=3 archive=pepper-tplo-referral exit=0
+2026-10-02T08:15:29Z auth.staff_login result=failure email=olivia.grant@willowbrookvets.com password=Kestrel#Wb-Adm1n-773 ip=10.20.0.10
+2026-10-02T08:15:41Z auth.staff_login result=success email=olivia.grant@willowbrookvets.com password=Kestrel#Wb-Adm1n-7731 ip=10.20.0.10 sid=5e1d9c7b3a2f48e6b0c4d8e2f6a0b4c8
+2026-10-02T08:16:03Z admin.role_changed by=1 target=5 role=staff
+2026-10-03T14:48:55Z api.token result=success email=marcus.webb@example.net ip=172.58.12.40
+2026-10-04T10:11:21Z auth.login result=failure email=priya.nair@example.com password=Priya#Secure19 ip=67.171.20.8
+2026-10-04T10:11:39Z auth.login result=success email=priya.nair@example.com password=Priya#Secure91 ip=67.171.20.8 sid=e2c4a6b8d0f2416385a7c9e1b3d5f7a9

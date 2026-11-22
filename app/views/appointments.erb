@@ -1,0 +1,27 @@
+<div class="container wb-page">
+  <div class="wb-page-head">
+    <h1>Appointments</h1>
+    <a href="/appointments/book" class="btn btn-wb"><span class="glyphicon glyphicon-plus"></span> Book appointment</a>
+  </div>
+  <div class="wb-card">
+    <% if @appts.empty? %>
+      <p>You have no appointments yet. <a href="/appointments/book">Book your first visit</a>.</p>
+    <% else %>
+      <table class="table wb-table">
+        <thead><tr><th>Date</th><th>Pet</th><th>Vet</th><th>Reason</th><th>Status</th><th></th></tr></thead>
+        <tbody>
+        <% @appts.each do |a| %>
+          <tr>
+            <td class="text-nowrap"><%= fmt_date a['appt_date'] %> <%= fmt_time a['appt_time'] %></td>
+            <td><%= h a['pet_name'] %></td>
+            <td><%= h a['vet_name'] %></td>
+            <td class="small"><%= h a['reason'].to_s[0, 60] %><%= a['reason'].to_s.length > 60 ? '&hellip;' : '' %></td>
+            <td><span class="label label-<%= a['status'] == 'cancelled' ? 'default' : (a['status'] == 'completed' ? 'info' : 'success') %>"><%= h a['status'] %></span></td>
+            <td class="text-right"><a href="/appointments/<%= a['id'] %>">View</a></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
+</div>

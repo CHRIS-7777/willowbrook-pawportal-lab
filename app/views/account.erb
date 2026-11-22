@@ -1,0 +1,42 @@
+<div class="container wb-page">
+  <h1>Account settings</h1>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="wb-card">
+        <h4>Profile</h4>
+        <form id="profile-form">
+          <div class="form-group"><label for="full_name">Full name</label>
+            <input class="form-control" id="full_name" value="<%= h current_user['full_name'] %>"></div>
+          <div class="form-group"><label for="phone">Mobile number</label>
+            <input class="form-control" id="phone" value="<%= h current_user['phone'] %>"></div>
+          <button class="btn btn-wb" type="submit">Save profile</button> <span id="profile-msg" class="small"></span>
+        </form>
+      </div>
+      <div class="wb-card">
+        <h4>Change password</h4>
+        <form method="post" action="/account/password">
+          <div class="form-group"><label>Current password</label><input type="password" class="form-control" name="current_password" required></div>
+          <div class="form-group"><label>New password</label><input type="password" class="form-control" name="new_password" required minlength="6"></div>
+          <button class="btn btn-default" type="submit">Change password</button>
+        </form>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="wb-card">
+        <h4>Contact &amp; records sharing</h4>
+        <form method="post" action="/account/contact">
+          <div class="form-group"><label for="email">Sign-in &amp; notification email</label>
+            <input type="email" class="form-control" id="email" name="email" value="<%= h current_user['email'] %>" required></div>
+          <div class="form-group"><label for="records_forward_email">Forward lab results &amp; invoices to</label>
+            <input type="email" class="form-control" id="records_forward_email" name="records_forward_email" value="<%= h current_user['records_forward_email'] %>" placeholder="e.g. your insurer or a family member">
+            <p class="help-block">We'll automatically email a copy of every new record and invoice to this address.</p></div>
+          <button class="btn btn-wb" type="submit">Update contact details</button>
+        </form>
+      </div>
+      <div class="wb-card">
+        <h4>Membership</h4>
+        <p>Member since <%= fmt_date current_user['created_at'] %>.</p>
+      </div>
+    </div>
+  </div>
+</div>

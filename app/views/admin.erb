@@ -1,0 +1,29 @@
+<div class="container wb-page">
+  <div class="wb-page-head"><h1>Administration</h1></div>
+  <%= erb :_staff_nav, layout: false, locals: { active: 'admin' } %>
+  <div class="wb-card">
+    <h4>User accounts</h4>
+    <table class="table wb-table">
+      <thead><tr><th>#</th><th>Name</th><th>Email</th><th>Phone</th><th>Joined</th><th>Role</th></tr></thead>
+      <tbody>
+      <% @users.each do |u| %>
+        <tr>
+          <td><%= u['id'] %></td>
+          <td><%= h u['full_name'] %><br><span class="small text-muted"><%= h u['title'] %></span></td>
+          <td><%= h u['email'] %></td>
+          <td><%= h u['phone'] %></td>
+          <td><%= fmt_date u['created_at'] %></td>
+          <td>
+            <form method="post" action="/admin/users/<%= u['id'] %>/role" class="form-inline">
+              <select name="account_type" class="form-control input-sm">
+                <% %w[client staff admin].each do |r| %><option <%= 'selected' if u['account_type'] == r %>><%= r %></option><% end %>
+              </select>
+              <button class="btn btn-default btn-sm" type="submit">Save</button>
+            </form>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

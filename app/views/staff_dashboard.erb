@@ -1,0 +1,32 @@
+<div class="container wb-page">
+  <div class="wb-page-head">
+    <h1>Staff portal</h1>
+    <span class="text-muted">Signed in as <%= h current_user['full_name'] %> &middot; <%= h current_user['title'] || current_user['account_type'] %></span>
+  </div>
+  <%= erb :_staff_nav, layout: false, locals: { active: 'queue' } %>
+
+  <div class="row wb-stats">
+    <div class="col-xs-6 col-sm-3"><div class="wb-stat"><span><%= @stats['today'] %></span>appointments today</div></div>
+    <div class="col-xs-6 col-sm-3"><div class="wb-stat"><span><%= @stats['clients'] %></span>registered clients</div></div>
+    <div class="col-xs-6 col-sm-3"><div class="wb-stat"><span><%= @stats['pets'] %></span>patients</div></div>
+    <div class="col-xs-6 col-sm-3"><div class="wb-stat"><span><%= money @stats['outstanding'] %></span>outstanding</div></div>
+  </div>
+
+  <div class="wb-card">
+    <h4>Upcoming appointments</h4>
+    <table class="table wb-table wb-queue">
+      <thead><tr><th>When</th><th>Patient</th><th>Owner</th><th>Vet</th><th>Reason for visit</th></tr></thead>
+      <tbody>
+      <% @queue.each do |a| %>
+        <tr>
+          <td class="text-nowrap"><strong><%= fmt_date a['appt_date'] %></strong><br><%= fmt_time a['appt_time'] %></td>
+          <td><%= h a['pet_name'] %><br><span class="small text-muted"><%= h a['species'] %></span></td>
+          <td><%= h a['owner_name'] %><br><span class="small text-muted"><%= h a['owner_phone'] %></span></td>
+          <td><%= h a['vet_name'] %></td>
+          <td class="small"><%= a['reason'] %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

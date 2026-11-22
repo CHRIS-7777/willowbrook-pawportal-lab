@@ -1,0 +1,11 @@
+<div class="container wb-page">
+  <div class="wb-page-head"><h1>Activity log</h1><span class="text-muted">Most recent 250 events, newest first</span></div>
+  <%= erb :_staff_nav, layout: false, locals: { active: 'activity' } %>
+  <div class="wb-card">
+    <% if @lines.empty? %>
+      <p class="text-muted">No activity recorded yet.</p>
+    <% else %>
+      <pre class="wb-log wb-log-tall"><% @lines.each do |l| %><%= h l %><% end %></pre>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+<div class="container wb-page">
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+      <div class="wb-card wb-auth wb-staff-auth">
+        <h2><span class="glyphicon glyphicon-briefcase"></span> Staff sign-in</h2>
+        <p class="text-muted">Clinical and front-desk team members only.</p>
+        <% if @error %><div class="alert alert-danger"><%= h @error %></div><% end %>
+        <form method="post" action="/staff/login">
+          <div class="form-group">
+            <label for="email">Work email</label>
+            <input type="email" class="form-control" id="email" name="email" value="<%= h @email %>" placeholder="name@willowbrookvets.com" required autofocus>
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" name="password" required>
+          </div>
+          <button type="submit" class="btn btn-wb btn-block">Sign in</button>
+        </form>
+        <p class="wb-auth-links small text-muted">Locked out? Contact the practice manager.</p>
+      </div>
+    </div>
+  </div>
+</div>

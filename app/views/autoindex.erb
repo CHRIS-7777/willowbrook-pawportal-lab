@@ -1,0 +1,17 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+ <head>
+  <title>Index of <%= h path %></title>
+ </head>
+ <body>
+<h1>Index of <%= h path %></h1>
+  <table>
+   <tr><th valign="top">&nbsp;</th><th>Name</th><th>Last modified</th><th>Size</th></tr>
+   <tr><th colspan="4"><hr></th></tr>
+   <% if path != '/intake/' %><tr><td valign="top">&nbsp;</td><td><a href="../">Parent Directory</a></td><td>&nbsp;</td><td align="right">  - </td></tr><% end %>
+   <% entries.each do |e| %>
+   <tr><td valign="top">&nbsp;</td><td><a href="<%= h Rack::Utils.escape_path(e[:name]) %>"><%= h e[:name] %></a></td><td align="right"><%= e[:mtime].utc.strftime('%Y-%m-%d %H:%M') %>  </td><td align="right"><%= e[:size] == '-' ? '-' : (e[:size] >= 1024 ? "#{(e[:size] / 1024.0).round(1)}K" : e[:size]) %></td></tr>
+   <% end %>
+   <tr><th colspan="4"><hr></th></tr>
+  </table>
+</body></html>

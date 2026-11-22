@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title><%= h e.class.name %> at <%= h request.path %></title>
+<style>
+  body { font: 14px/1.5 Menlo, Consolas, monospace; background: #fff6f6; color: #333; margin: 0; }
+  header { background: #b0302f; color: #fff; padding: 18px 28px; }
+  header h1 { margin: 0; font-size: 22px; } header p { margin: 4px 0 0; opacity: .9; }
+  section { padding: 14px 28px; }
+  h2 { font-size: 15px; color: #b0302f; border-bottom: 1px solid #e6c4c4; padding-bottom: 4px; }
+  pre { background: #fff; border: 1px solid #e6c4c4; padding: 10px; overflow-x: auto; white-space: pre-wrap; }
+  table { border-collapse: collapse; } td { padding: 2px 14px 2px 0; vertical-align: top; }
+</style>
+</head>
+<body>
+<header>
+  <h1><%= h e.class.name %></h1>
+  <p><%= h e.message %></p>
+</header>
+<section>
+  <h2>Request</h2>
+  <table>
+    <tr><td>Method</td><td><%= h request.request_method %></td></tr>
+    <tr><td>Path</td><td><%= h request.fullpath %></td></tr>
+    <tr><td>Params</td><td><%= h params.to_h.inspect %></td></tr>
+    <tr><td>Remote IP</td><td><%= h env['REMOTE_ADDR'] %></td></tr>
+  </table>
+</section>
+<% if sql %>
+<section>
+  <h2>Last SQL statement</h2>
+  <pre><%= h sql %></pre>
+</section>
+<% end %>
+<section>
+  <h2>Backtrace</h2>
+  <pre><%= h e.backtrace.to_a.first(30).join("\n") %></pre>
+</section>
+<section>
+  <h2>Environment</h2>
+  <table>
+    <tr><td>Application</td><td>PawPortal <%= PawPortal::APP_VERSION %> (<%= h settings.environment %>)</td></tr>
+    <tr><td>Root</td><td><%= h settings.root %></td></tr>
+    <tr><td>Ruby</td><td><%= RUBY_VERSION %> (<%= RUBY_PLATFORM %>)</td></tr>
+    <tr><td>Sinatra</td><td><%= Sinatra::VERSION %></td></tr>
+    <tr><td>Rack</td><td><%= Rack.release %></td></tr>
+    <tr><td>Server</td><td><%= h env['SERVER_SOFTWARE'] %></td></tr>
+  </table>
+</section>
+</body>
+</html>

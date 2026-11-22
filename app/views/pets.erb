@@ -1,0 +1,21 @@
+<div class="container wb-page">
+  <div class="wb-page-head">
+    <h1>My pets</h1>
+    <a href="/pets/new" class="btn btn-wb"><span class="glyphicon glyphicon-plus"></span> Add a pet</a>
+  </div>
+  <% if @pets.empty? %>
+    <div class="wb-card"><p>No pets on your account yet. <a href="/pets/new">Add one now</a>.</p></div>
+  <% end %>
+  <div class="row">
+    <% @pets.each do |p| %>
+      <div class="col-sm-6 col-md-4">
+        <div class="wb-card wb-pet-card">
+          <img src="<%= h pet_photo(p) %>" alt="">
+          <h4><a href="/pets/<%= p['id'] %>"><%= h p['name'] %></a></h4>
+          <p class="text-muted"><%= h p['species'] %><%= p['breed'].to_s.empty? ? '' : " &middot; #{h p['breed']}" %></p>
+          <a href="/pets/<%= p['id'] %>" class="btn btn-default btn-sm">View profile &amp; records</a>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

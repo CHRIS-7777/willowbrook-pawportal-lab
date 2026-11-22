@@ -1,0 +1,69 @@
+<div class="container wb-page">
+  <h1>Book an appointment</h1>
+  <% if @pets.empty? %>
+    <div class="wb-card"><p>Before booking, please <a href="/pets/new">add your pet</a> to your account.</p></div>
+  <% else %>
+  <% pre_vet = @draft ? @draft.vet_id.to_i : params['vet'].to_i %>
+  <div class="row">
+    <div class="col-md-7">
+      <div class="wb-card">
+        <form id="booking-form" method="post" action="/appointments">
+          <div class="form-group">
+            <label for="pet_id">Pet</label>
+            <select class="form-control" id="pet_id" name="pet_id">
+              <% @pets.each do |p| %>
+                <option value="<%= p['id'] %>" <%= 'selected' if @draft && @draft.pet_id.to_i == p['id'] %>><%= h p['name'] %> (<%= h p['species'] %>)</option>
+              <% end %>
+            </select>
+          </div>
+          <div class="row">
+            <div class="col-sm-6 form-group">
+              <label for="vet_id">Veterinarian</label>
+              <select class="form-control" id="vet_id" name="vet_id">
+                <% @vets.each do |v| %>
+                  <option value="<%= v['id'] %>" <%= 'selected' if pre_vet == v['id'] %>><%= h v['name'] %> &ndash; <%= h v['specialty'] %></option>
+                <% end %>
+              </select>
+            </div>
+            <div class="col-sm-6 form-group">
+              <label for="date">Date</label>
+              <input type="date" class="form-control" id="date" name="date" min="<%= Date.today.iso8601 %>"
+                     value="<%= h(@draft && !@draft.date.to_s.empty? ? @draft.date : (Date.today + 1).iso8601) %>">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="slot_id">Available times</label>
+            <select class="form-control" id="slot_id" name="slot_id" data-selected="<%= @draft ? @draft.slot_id.to_i : '' %>" required>
+              <option value="">Choose a vet and date</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="reason">Reason for visit</label>
+            <textarea class="form-control" id="reason" name="reason" rows="4" placeholder="Describe symptoms, how long they've been going on, and anything the vet should prepare for."><%= h(@draft && @draft.reason) %></textarea>
+          </div>
+          <button type="submit" class="btn btn-wb">Confirm booking</button>
+          <button type="submit" class="btn btn-default" formaction="/appointments/draft" formnovalidate>Save as draft</button>
+        </form>
+      </div>
+    </div>
+    <div class="col-md-5">
+      <% if @draft %>
+      <div class="wb-card wb-draft">
+        <h4><span class="glyphicon glyphicon-floppy-disk"></span> Saved draft</h4>
+        <p class="small text-muted">Saved <%= Time.at(@draft.saved_at.to_i).strftime('%d %b %Y %H:%M') %>. Your form has been pre-filled.</p>
+        <h5>SMS reminder preview</h5>
+        <div class="wb-sms"><%= h @reminder %></div>
+      </div>
+      <% end %>
+      <div class="wb-aside">
+        <h4>Good to know</h4>
+        <ul>
+          <li>Standard consultations are 20 minutes and cost $65.</li>
+          <li>Please arrive 5 minutes early for your first visit.</li>
+          <li>Need to cancel? Do it from your appointments page up to 24h before.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>

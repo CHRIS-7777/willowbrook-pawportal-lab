@@ -1,0 +1,5 @@
+client_id,full_name,email,phone,address,pets,balance_due
+6,Jessica Moore,jessica.moore@example.net,+1 (503) 555-0187,"1420 SE Alder St, Portland, OR 97214","Bella;Milo",0.00
+7,David Chen,d.chen@example.org,+1 (503) 555-0142,"88 NW Hoyt St Apt 5, Portland, OR 97209",Pepper,1385.00
+8,Priya Nair,priya.nair@example.com,+1 (971) 555-0164,"3315 N Williams Ave, Portland, OR 97227",Luna,140.00
+9,Marcus Webb,marcus.webb@example.net,+1 (503) 555-0123,"7720 SW Capitol Hwy, Portland, OR 97219","Kiwi;Rex",0.00

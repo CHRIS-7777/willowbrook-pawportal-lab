@@ -1,0 +1,8 @@
+FRONT DESK HANDOVER - week 39
+=============================
+- Mailchimp export of the client list is in this folder (client-export-2026-09.csv) for the
+  vaccination reminder campaign. Delete once the campaign has been sent.
+- New staff accounts are created by Olivia. Clinicians sign in at /staff/login.
+- Reception kiosk (WB-412) is still waiting on IT - it will use the shared clinic key, not a login.
+- Guest Wi-Fi: WB-Guest / pawsandclaws26
+- Pepper (Chen) balance outstanding - payment plan agreed, do not send to collections.

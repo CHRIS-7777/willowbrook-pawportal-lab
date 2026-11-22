@@ -1,0 +1,38 @@
+<div class="container wb-page">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="wb-card wb-auth">
+        <h2>Create your PawPortal account</h2>
+        <% if @error %><div class="alert alert-danger"><%= h @error %></div><% end %>
+        <form method="post" action="/register">
+          <div class="form-group">
+            <label for="full_name">Full name *</label>
+            <input class="form-control" id="full_name" name="full_name" value="<%= h(@form && @form['full_name']) %>" required>
+          </div>
+          <div class="row">
+            <div class="col-sm-7 form-group">
+              <label for="email">Email address *</label>
+              <input type="email" class="form-control" id="email" name="email" value="<%= h(@form && @form['email']) %>" required>
+            </div>
+            <div class="col-sm-5 form-group">
+              <label for="phone">Mobile number</label>
+              <input class="form-control" id="phone" name="phone" value="<%= h(@form && @form['phone']) %>" placeholder="For SMS reminders">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6 form-group">
+              <label for="password">Password *</label>
+              <input type="password" class="form-control" id="password" name="password" required minlength="6">
+            </div>
+            <div class="col-sm-6 form-group">
+              <label for="password_confirm">Confirm password *</label>
+              <input type="password" class="form-control" id="password_confirm" name="password_confirm" required>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-wb btn-block">Create account</button>
+        </form>
+        <p class="wb-auth-links">Already registered? <a href="/login">Sign in</a></p>
+      </div>
+    </div>
+  </div>
+</div>

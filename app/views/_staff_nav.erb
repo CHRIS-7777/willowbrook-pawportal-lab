@@ -1,0 +1,6 @@
+<ul class="nav nav-tabs wb-staff-tabs">
+  <li class="<%= 'active' if active == 'queue' %>"><a href="/staff">Appointment queue</a></li>
+  <li class="<%= 'active' if active == 'charts' %>"><a href="/staff/charts">Patient charts</a></li>
+  <li class="<%= 'active' if active == 'activity' %>"><a href="/staff/activity">Activity log</a></li>
+  <% if admin? %><li class="<%= 'active' if active == 'admin' %>"><a href="/admin">Administration</a></li><% end %>
+</ul>

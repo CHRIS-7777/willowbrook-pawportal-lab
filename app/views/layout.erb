@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= @title ? "#{h @title} | " : '' %>Willowbrook Veterinary Clinic</title>
+  <link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg">
+  <link rel="stylesheet" href="/assets/vendor/bootstrap-3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/css/clinic.css">
+</head>
+<body>
+<nav class="navbar navbar-default navbar-static-top wb-nav">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#wb-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"><img src="/assets/img/logo.svg" alt="" width="30" height="30"> Willowbrook <small>Veterinary Clinic</small></a>
+    </div>
+    <div class="collapse navbar-collapse" id="wb-navbar">
+      <ul class="nav navbar-nav">
+        <li><a href="/services">Services</a></li>
+        <li><a href="/team">Our Team</a></li>
+        <li><a href="/find-a-vet">Find a Vet</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <% if logged_in? %>
+          <% if staff? %><li><a href="/staff"><span class="glyphicon glyphicon-briefcase"></span> Staff portal</a></li><% end %>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              <span class="glyphicon glyphicon-user"></span> <%= h current_user['full_name'] %> <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="/dashboard">Dashboard</a></li>
+              <li><a href="/pets">My pets</a></li>
+              <li><a href="/appointments">Appointments</a></li>
+              <li><a href="/invoices">Invoices</a></li>
+              <li><a href="/account">Account settings</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="/logout">Sign out</a></li>
+            </ul>
+          </li>
+        <% else %>
+          <li><a href="/login">Sign in</a></li>
+          <li><a href="/register" class="wb-cta">Register</a></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<% if (f = take_flash) %>
+<div class="container wb-flash-wrap">
+  <div class="alert alert-<%= h f['t'] %> wb-flash" role="alert"><%= h f['m'] %></div>
+</div>
+<% end %>
+
+<main>
+<%= yield %>
+</main>
+
+<footer class="wb-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-4">
+        <h5>Willowbrook Veterinary Clinic</h5>
+        <p>2280 SE Willow Creek Rd<br>Portland, OR 97202<br>(503) 555-0100</p>
+      </div>
+      <div class="col-sm-4">
+        <h5>Opening hours</h5>
+        <p>Mon&ndash;Fri 8:30am &ndash; 6:00pm<br>Sat 9:00am &ndash; 1:00pm<br>24/7 emergency line: (503) 555-0199</p>
+      </div>
+      <div class="col-sm-4">
+        <h5>PawPortal</h5>
+        <p><a href="/register">Create an account</a> &middot; <a href="/login">Sign in</a><br>
+           <a href="/intake/forms/new-patient-registration.pdf">New patient form (PDF)</a><br>
+           <span id="portal-status" class="wb-status">Checking portal status&hellip;</span></p>
+      </div>
+    </div>
+    <p class="wb-copy">&copy; 2026 Willowbrook Veterinary Clinic LLC. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="/assets/vendor/jquery-2.2.4.min.js"></script>
+<script src="/assets/vendor/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+<script src="/assets/js/portal.js"></script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<div class="container wb-page">
+  <div class="row">
+    <div class="col-md-5 col-md-offset-3 col-sm-8 col-sm-offset-2">
+      <div class="wb-card wb-auth">
+        <h2>Reset your password</h2>
+        <p class="text-muted">Enter the email address on your account and we'll send you a verification code.</p>
+        <% if @error %><div class="alert alert-danger"><%= h @error %></div><% end %>
+        <form method="post" action="/forgot">
+          <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" class="form-control" id="email" name="email" value="<%= h @email %>" required autofocus>
+          </div>
+          <button type="submit" class="btn btn-wb btn-block">Send code</button>
+        </form>
+        <p class="wb-auth-links"><a href="/login">Back to sign in</a></p>
+      </div>
+    </div>
+  </div>
+</div>

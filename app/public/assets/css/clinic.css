@@ -1,0 +1,79 @@
+/* Willowbrook Veterinary Clinic - PawPortal theme */
+:root { --wb-green: #2f7d62; --wb-green-dark: #235f4a; --wb-cream: #f7f4ee; --wb-ink: #23302b; --wb-sand: #efe7d8; }
+body { font-family: "Nunito", "Segoe UI", "Helvetica Neue", Arial, sans-serif; color: var(--wb-ink); background: var(--wb-cream); }
+a { color: var(--wb-green); } a:hover, a:focus { color: var(--wb-green-dark); }
+h1, h2, h3, h4 { font-weight: 800; letter-spacing: -.01em; }
+main { min-height: 60vh; }
+
+.wb-nav { background: #fff; border: 0; border-bottom: 1px solid #e7e1d4; margin-bottom: 0; }
+.wb-nav .navbar-brand { font-weight: 800; color: var(--wb-ink); display: flex; align-items: center; gap: 8px; }
+.wb-nav .navbar-brand img { display: inline-block; }
+.wb-nav .navbar-brand small { font-weight: 600; color: #7a857f; font-size: 13px; }
+.wb-nav .navbar-nav > li > a { font-weight: 600; color: #46524c; }
+.wb-nav .wb-cta { color: #fff !important; background: var(--wb-green); border-radius: 20px; margin: 8px 0 8px 8px; padding: 6px 16px !important; }
+
+.btn-wb { background: var(--wb-green); color: #fff; border: 0; font-weight: 700; border-radius: 22px; padding-left: 20px; padding-right: 20px; }
+.btn-wb:hover, .btn-wb:focus { background: var(--wb-green-dark); color: #fff; }
+
+.wb-hero { background: linear-gradient(135deg, #e5f0ea 0%, #f7f4ee 70%); padding: 60px 0 50px; }
+.wb-hero h1 { font-size: 42px; margin-top: 10px; }
+.wb-hero .lead { color: #4d5b55; }
+.wb-eyebrow { text-transform: uppercase; letter-spacing: .12em; font-size: 12px; font-weight: 700; color: var(--wb-green); }
+.wb-hero-img { margin-top: 10px; }
+.wb-section { padding: 40px 15px; }
+.wb-band { background: var(--wb-sand); padding: 40px 0; }
+.wb-band h2 { margin-bottom: 25px; }
+.wb-features .wb-icon { width: 58px; height: 58px; margin: 0 auto 10px; border-radius: 50%; background: #dcece4; color: var(--wb-green); font-size: 24px; line-height: 58px; }
+
+.wb-page { padding-top: 30px; padding-bottom: 40px; }
+.wb-page-head { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-bottom: 15px; }
+.wb-page-head h1 { margin: 0; }
+.wb-card { background: #fff; border-radius: 12px; padding: 20px 22px; margin-bottom: 20px; box-shadow: 0 1px 2px rgba(35,48,43,.06), 0 4px 14px rgba(35,48,43,.05); }
+.wb-card h4 { margin-top: 0; }
+.wb-aside { padding: 20px 10px; color: #4d5b55; }
+.wb-avatar { width: 96px; height: 96px; border-radius: 50%; background: #dcece4; object-fit: cover; }
+.wb-vet .media-left { padding-right: 20px; }
+.wb-quote { border-left-color: var(--wb-green); font-size: 16px; }
+.wb-table > thead > tr > th { border-bottom-width: 1px; color: #7a857f; font-weight: 700; text-transform: uppercase; font-size: 11px; letter-spacing: .06em; }
+
+.wb-auth { padding: 30px; }
+.wb-auth h2 { margin-top: 0; }
+.wb-auth-links { margin-top: 15px; text-align: center; }
+.wb-staff-auth { border-top: 4px solid var(--wb-ink); }
+.wb-code { font-size: 22px; letter-spacing: .4em; text-align: center; }
+
+.wb-pet-tile { display: block; text-align: center; padding: 10px; border-radius: 10px; color: var(--wb-ink); }
+.wb-pet-tile:hover { background: #f1f6f3; text-decoration: none; }
+.wb-pet-tile img { width: 84px; height: 84px; border-radius: 50%; object-fit: cover; background: #dcece4; display: block; margin: 0 auto 6px; }
+.wb-pet-tile span { display: block; font-size: 12px; }
+.wb-pet-card { text-align: center; }
+.wb-pet-card img, .wb-pet-photo { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; background: #dcece4; }
+.wb-dl dt { width: 80px; } .wb-dl dd { margin-left: 95px; text-align: left; }
+.wb-notes { background: #faf7f0; border-radius: 8px; padding: 8px 10px; font-size: 13px; text-align: left; }
+.wb-reason { background: #faf7f0; border-radius: 8px; padding: 12px 14px; white-space: pre-wrap; }
+.wb-sms { background: #e7f3ec; border-radius: 14px 14px 14px 2px; padding: 12px 14px; font-size: 13px; white-space: pre-wrap; }
+.wb-draft { border-left: 4px solid var(--wb-green); }
+.wb-mobile input { font-size: 11px; }
+.wb-inv-list li { padding: 4px 0; border-bottom: 1px solid #f0ece3; }
+
+.wb-flash-wrap { margin-top: 18px; }
+.wb-flash { white-space: pre-wrap; word-break: break-word; max-height: 360px; overflow: auto; }
+
+.wb-staff-tabs { margin-bottom: 20px; }
+.wb-stats .wb-stat { background: #fff; border-radius: 12px; padding: 14px; margin-bottom: 15px; color: #7a857f; font-size: 12px; text-transform: uppercase; letter-spacing: .05em; }
+.wb-stat span { display: block; font-size: 26px; font-weight: 800; color: var(--wb-ink); letter-spacing: 0; text-transform: none; }
+.wb-log { background: #1f2a26; color: #d6e6dd; border: 0; border-radius: 8px; font-size: 12px; max-height: 320px; overflow: auto; white-space: pre-wrap; }
+.wb-log-tall { max-height: 640px; }
+
+.wb-footer { background: #23302b; color: #c7d2cc; padding: 36px 0 16px; margin-top: 30px; }
+.wb-footer h5 { color: #fff; font-weight: 700; }
+.wb-footer a { color: #9fd6bd; }
+.wb-copy { border-top: 1px solid #36453f; margin-top: 18px; padding-top: 14px; font-size: 12px; color: #8a9891; }
+.wb-status:before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #999; margin-right: 6px; }
+.wb-status.ok:before { background: #53c48f; } .wb-status.down:before { background: #e0605e; }
+
+.wb-empty { padding: 70px 15px; }
+.wb-invoice-body { background: #fff; }
+.wb-invoice { max-width: 820px; padding-top: 30px; }
+.wb-inv-head { border-bottom: 2px solid var(--wb-green); margin-bottom: 20px; padding-bottom: 10px; }
+@media (max-width: 767px) { .wb-hero h1 { font-size: 30px; } }

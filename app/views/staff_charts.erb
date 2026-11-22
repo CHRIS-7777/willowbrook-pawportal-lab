@@ -1,0 +1,39 @@
+<div class="container wb-page">
+  <div class="wb-page-head"><h1>Patient charts</h1></div>
+  <%= erb :_staff_nav, layout: false, locals: { active: 'charts' } %>
+
+  <div class="row">
+    <div class="col-md-5">
+      <div class="wb-card">
+        <h4>Export chart for referral</h4>
+        <p class="small text-muted">Bundles every record on file for a patient into a compressed archive, ready for secure transfer to a referral hospital or insurer.</p>
+        <form method="post" action="/staff/charts/export">
+          <div class="form-group"><label>Patient</label>
+            <select class="form-control" name="pet_id">
+              <% @pets.each do |p| %><option value="<%= p['id'] %>"><%= h p['name'] %> &ndash; <%= h p['owner'] %> (#<%= p['id'] %>)</option><% end %>
+            </select></div>
+          <div class="form-group"><label>Archive name</label>
+            <input class="form-control" name="archive_name" placeholder="e.g. bella-orthopaedic-referral">
+            <p class="help-block">Optional. Defaults to chart-&lt;id&gt;-&lt;date&gt;.</p></div>
+          <button class="btn btn-wb" type="submit">Create archive</button>
+        </form>
+      </div>
+    </div>
+    <div class="col-md-7">
+      <% if @export %>
+      <div class="wb-card">
+        <h4>Export <%= @export[:ok] ? 'complete' : 'failed' %></h4>
+        <p>Patient: <strong><%= h @export[:pet]['name'] %></strong> &middot; archive <code><%= h @export[:name] %>.tar.gz</code></p>
+        <pre class="wb-log"><%= h @export[:log] %></pre>
+      </div>
+      <% end %>
+      <div class="wb-card">
+        <h4>All patients</h4>
+        <table class="table table-condensed wb-table">
+          <thead><tr><th>#</th><th>Name</th><th>Species</th><th>Owner</th></tr></thead>
+          <tbody><% @pets.each do |p| %><tr><td><%= p['id'] %></td><td><%= h p['name'] %></td><td><%= h p['species'] %> <span class="text-muted"><%= h p['breed'] %></span></td><td><%= h p['owner'] %></td></tr><% end %></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

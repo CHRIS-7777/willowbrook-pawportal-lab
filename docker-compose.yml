@@ -1,0 +1,52 @@
+# Willowbrook Veterinary Clinic - PawPortal (intentionally vulnerable training lab)
+# Start:  docker compose up -d --build        Reset:  ./reset.sh
+name: willowbrook
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: willowbrook-db
+    restart: unless-stopped
+    command: ["--default-authentication-plugin=mysql_native_password", "--local-infile=0", "--secure-file-priv=NULL"]
+    environment:
+      MYSQL_ROOT_PASSWORD: "Wb_r00t-MySQL!2026"
+    volumes:
+      - ./db/init.sql:/docker-entrypoint-initdb.d/01-init.sql:ro
+      - wb-dbdata:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-pWb_r00t-MySQL!2026"]
+      interval: 5s
+      timeout: 5s
+      retries: 40
+    networks: [backend]
+
+  web:
+    build: .
+    image: willowbrook-pawportal:2.3.1
+    container_name: willowbrook-web
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_HOST: db
+      DB_NAME: willowbrook
+      DB_USER: wb_portal
+      DB_PASS: "Pawp0rtal_Db!4471"
+      TOKEN_SIGNING_KEY: "wb-tok-3f9a1c7e5b2d4086a1e9c2"
+      CLINIC_API_KEY: "wbk_live_5d0e8a7c41f94b2e9c3a"
+      SMTP_HOST: "mail.willowbrookvets.com"
+      SMTP_USER: "reminders@willowbrookvets.com"
+      SMTP_PASSWORD: "Smtp!Willow-2026"
+      PHARMACY_API_TOKEN: "rxp_live_8c1f2e7a9d3b46e0"
+    ports:
+      - "8095:8080"
+    networks: [frontend, backend]
+
+networks:
+  frontend: {}
+  backend:
+    internal: true
+
+volumes:
+  wb-dbdata: {}
